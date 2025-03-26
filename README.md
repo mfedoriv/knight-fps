@@ -1,2 +1,2 @@
 # knight-fps
-FPS on Unity about knights
+FPS about knights using Unity engine
