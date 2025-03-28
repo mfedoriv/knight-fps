@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16d8691b-db44-46a7-afb3-1e9b28cc5ba6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Test/Blue.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Test/Blue.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Test/Green.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Test/Green.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.knight-fps/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.knight-fps/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerInputHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerInputHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapon/Bullet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapon/Bullet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapon/Weapon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapon/Weapon.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,6 +106,9 @@
       <workItem from="1743013870513" duration="596000" />
       <workItem from="1743025621445" duration="1999000" />
       <workItem from="1743062237748" duration="3844000" />
+      <workItem from="1743077020244" duration="92000" />
+      <workItem from="1743096416230" duration="443000" />
+      <workItem from="1743180125775" duration="4271000" />
     </task>
     <servers />
   </component>

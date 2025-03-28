@@ -11,6 +11,12 @@ namespace Weapon
                 print("Hit " + other.gameObject.name);
                 Destroy(gameObject);
             }
+            
+            if (other.gameObject.CompareTag("Wall"))
+            {
+                print("Hit a wall");
+                Destroy(gameObject);
+            }
         }
     }
 }

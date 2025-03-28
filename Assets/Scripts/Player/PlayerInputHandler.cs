@@ -31,7 +31,10 @@ namespace Player
         public bool JumpTriggered { get; private set; }
         public bool CrouchTriggered { get; private set; }
         public bool InteractTriggered { get; private set; }
-        public bool ShootTriggered { get; private set; }
+        public bool ShootPressed { get; private set; }
+        public bool ShootHeld { get; private set; }
+        
+        private bool ShootPressedConsumed = false;
     
         public static PlayerInputHandler Instance { get; private set; }
 
@@ -72,9 +75,20 @@ namespace Player
 
             _interactAction.performed += context => InteractTriggered = true;
             _interactAction.canceled += context => InteractTriggered = false;
-
-            _shootAction.performed += context => ShootTriggered = true;
-            _shootAction.canceled += context => ShootTriggered = false;
+            
+            _shootAction.started += context =>
+            {
+                if (ShootPressedConsumed) return;
+                ShootPressed = true;
+                ShootPressedConsumed = true;
+            };
+            _shootAction.performed += context => ShootHeld = true;
+            _shootAction.canceled += context =>
+            {
+                ShootHeld = false;
+                ShootPressed = false;
+                ShootPressedConsumed = false;
+            };
         }
 
         private void OnEnable()
