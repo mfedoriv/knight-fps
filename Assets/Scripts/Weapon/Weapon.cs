@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Player;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -19,10 +20,10 @@ namespace Weapon
         
         // Burst
         [SerializeField] private int bulletsPerBurst = 3;
-        [FormerlySerializedAs("currentBurst")] [SerializeField] private int burstBulletsLeft;
+        [SerializeField] private int burstBulletsLeft;
         
         // Spread
-        [SerializeField] private float spreadIntencity;
+        [SerializeField] private float spreadIntensity;
         
         // Bullet
         [SerializeField] private GameObject bulletPrefab;
@@ -57,26 +58,18 @@ namespace Weapon
         // Update is called once per frame
         void Update()
         {
-            switch (currentShootingMode)
+            if (currentShootingMode == ShootingMode.Auto)
             {
-                case ShootingMode.Auto:
-                    isShooting = _inputHandler.ShootHeld; // Работает при удержании
-                    break;
-
-                case ShootingMode.Single:
-                    isShooting = _inputHandler.ShootPressed && isReadyToShoot; // Один раз за нажатие
-                    break;
-
-                case ShootingMode.Burst:
-                    isShooting = _inputHandler.ShootPressed && isReadyToShoot; // Один раз за нажатие
-                    break;
+                isShooting = Input.GetKey(KeyCode.Mouse0);
+            } else if (currentShootingMode is ShootingMode.Single or ShootingMode.Burst)
+            {
+                isShooting = Input.GetKeyDown(KeyCode.Mouse0);
             }
 
-            if (isReadyToShoot && isShooting)
-            {
-                burstBulletsLeft = bulletsPerBurst;
-                HandleShooting();
-            }
+            if (!isReadyToShoot || !isShooting) return;
+            
+            burstBulletsLeft = bulletsPerBurst;
+            HandleShooting();
         }
 
         private void HandleShooting()
@@ -84,7 +77,7 @@ namespace Weapon
             isReadyToShoot = false;
 
             Vector3 shootingDirection = CalculateDirectionAndSpread().normalized;
-            GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation * Quaternion.Euler(-90, 0, 0));
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation * Quaternion.Euler(0, 0, 0));
 
             // Pointing bullet to face the shooting direction
             bullet.transform.forward = shootingDirection;
@@ -131,8 +124,8 @@ namespace Weapon
             }
 
             Vector3 direction = targetPoint - bulletSpawn.position;
-            float x = UnityEngine.Random.Range(-spreadIntencity, spreadIntencity);
-            float y = UnityEngine.Random.Range(-spreadIntencity, spreadIntencity);
+            float x = UnityEngine.Random.Range(-spreadIntensity, spreadIntensity);
+            float y = UnityEngine.Random.Range(-spreadIntensity, spreadIntensity);
             
             return direction + new Vector3(x, y, 0);
         }
