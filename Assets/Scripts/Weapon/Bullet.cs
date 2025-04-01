@@ -4,19 +4,38 @@ namespace Weapon
 {
     public class Bullet : MonoBehaviour
     {
-        private void OnCollisionEnter(Collision other)
+        private void OnCollisionEnter(Collision hitObject)
         {
-            if (other.gameObject.CompareTag("Target"))
+            if (hitObject.gameObject.CompareTag("Target"))
             {
-                print("Hit " + other.gameObject.name);
+                print("Hit " + hitObject.gameObject.name);
+                
+                CreateBulletImpactEffect(hitObject);
+                
                 Destroy(gameObject);
             }
             
-            if (other.gameObject.CompareTag("Wall"))
+            if (hitObject.gameObject.CompareTag("Wall"))
             {
                 print("Hit a wall");
+                
+                CreateBulletImpactEffect(hitObject);
+                
                 Destroy(gameObject);
             }
+        }
+
+        private void CreateBulletImpactEffect(Collision hitObject)
+        {
+            ContactPoint contact = hitObject.GetContact(0);
+
+            GameObject hole = Instantiate(
+                GlobalReferences.Instance.bulletPrefabEffectPrefab,
+                contact.point,
+                Quaternion.LookRotation(contact.normal)
+                );
+            
+            hole.transform.SetParent(hitObject.gameObject.transform);
         }
     }
 }

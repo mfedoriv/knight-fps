@@ -123,11 +123,16 @@ namespace Weapon
                 targetPoint = ray.GetPoint(100);
             }
 
-            Vector3 direction = targetPoint - bulletSpawn.position;
-            float x = UnityEngine.Random.Range(-spreadIntensity, spreadIntensity);
-            float y = UnityEngine.Random.Range(-spreadIntensity, spreadIntensity);
+            Vector3 direction = (targetPoint - bulletSpawn.position).normalized;
+            // spread in circle
+            Vector2 spreadCircle = UnityEngine.Random.insideUnitCircle * spreadIntensity;
+
+            var transform1 = playerCamera.transform;
+            Vector3 right = transform1.right;
+            Vector3 up = transform1.up;
+            Vector3 spread = right * spreadCircle.x + up * spreadCircle.y;
             
-            return direction + new Vector3(x, y, 0);
+            return (direction + spread).normalized;
         }
 
         private IEnumerator DestroyBulletAfterTime(GameObject bullet, float delay)
